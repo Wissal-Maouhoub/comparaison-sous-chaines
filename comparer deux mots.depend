@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1791317821 source:c:\users\hp\desktop\bouziri\comparer deux mots\main.cpp
+	<iostream>
+	<string>
+	<chrono>
+	<iostream>
+	<fstream>
+	<string>
+	<vector>
+	<chrono>
+

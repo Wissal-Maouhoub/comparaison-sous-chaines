@@ -1,130 +1,3 @@
-
-/*
-#include <iostream>
-#include <string>
-#include <chrono>
-
-using namespace std;
-using namespace chrono;
-
-
-// Methode 1 : sans find()
-bool contientSansFind(string mot1, string mot2)
-{
-    int i = 0;
-    int j = 0;
-
-    while (i < mot1.length() && j < mot2.length())
-    {
-        if (mot1[i] == mot2[j])
-        {
-            j++;
-        }
-
-        i++;
-    }
-
-    return j == mot2.length();
-}
-
-
-// Methode 2 : avec find()
-bool contientAvecFind(string mot1, string mot2)
-{
-    int position = 0;
-
-    for (int i = 0; i < mot2.length(); i++)
-    {
-        position = mot1.find(mot2[i], position);
-
-        if (position == string::npos)
-        {
-            return false;
-        }
-
-        position++;
-    }
-
-    return true;
-}
-
-
-int main()
-{
-    string mot1, mot2;
-
-    cout << "Entrez le premier mot : ";
-    cin >> mot1;
-
-    cout << "Entrez le deuxieme mot : ";
-    cin >> mot2;
-
-
-    // Vérification des résultats
-
-    if (contientSansFind(mot1, mot2))
-        cout << "Methode 1 : le mot 2 est contenu dans le mot 1." << endl;
-    else
-        cout << "Methode 1 : le mot 2 n'est pas contenu dans le mot 1." << endl;
-
-
-    if (contientAvecFind(mot1, mot2))
-        cout << "Methode 2 : le mot 2 est contenu dans le mot 1." << endl;
-    else
-        cout << "Methode 2 : le mot 2 n'est pas contenu dans le mot 1." << endl;
-
-
-    // Nombre de répétitions
-    const int N = 1000000;
-
-
-    // Mesure du temps de la méthode 1
-
-    auto debut1 = high_resolution_clock::now();
-
-    for (int i = 0; i < N; i++)
-    {
-        contientSansFind(mot1, mot2);
-    }
-
-    auto fin1 = high_resolution_clock::now();
-
-    auto duree1 = duration_cast<nanoseconds>(fin1 - debut1).count();
-
-
-    // Mesure du temps de la méthode 2
-
-    auto debut2 = high_resolution_clock::now();
-
-    for (int i = 0; i < N; i++)
-    {
-        contientAvecFind(mot1, mot2);
-    }
-
-    auto fin2 = high_resolution_clock::now();
-
-    auto duree2 = duration_cast<nanoseconds>(fin2 - debut2).count();
-
-
-    // Affichage des résultats
-
-    cout << endl;
-    cout << "===== TEMPS D'EXECUTION =====" << endl;
-
-    cout << "Methode 1 (sans find) :" << endl;
-    cout << "Temps total : " << duree1 << " ns" << endl;
-    cout << "Temps moyen : " << (double)duree1 / N << " ns" << endl;
-
-    cout << endl;
-
-    cout << "Methode 2 (avec find) :" << endl;
-    cout << "Temps total : " << duree2 << " ns" << endl;
-    cout << "Temps moyen : " << (double)duree2 / N << " ns" << endl;
-
-
-    return 0;
-}
-*/
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -136,13 +9,13 @@ using namespace chrono;
 
 
 // =====================================================
-// Méthode 1 : sans find()
-// Recherche d'une sous-chaîne CONSECUTIVE
+// Mï¿½thode 1 : sans find()
+// Recherche d'une sous-chaï¿½ne CONSECUTIVE
 // =====================================================
 
 bool contientSansFind(string mot, string sousChaine)
 {
-    // Si la sous-chaîne est plus longue que le mot
+    // Si la sous-chaï¿½ne est plus longue que le mot
     if (sousChaine.length() > mot.length())
     {
         return false;
@@ -153,7 +26,7 @@ bool contientSansFind(string mot, string sousChaine)
     {
         bool identique = true;
 
-        // Comparer les caractères consécutifs
+        // Comparer les caractï¿½res consï¿½cutifs
         for (int j = 0; j < sousChaine.length(); j++)
         {
             if (mot[i + j] != sousChaine[j])
@@ -163,7 +36,7 @@ bool contientSansFind(string mot, string sousChaine)
             }
         }
 
-        // Toute la sous-chaîne a été trouvée
+        // Toute la sous-chaï¿½ne a ï¿½tï¿½ trouvï¿½e
         if (identique)
         {
             return true;
@@ -175,8 +48,8 @@ bool contientSansFind(string mot, string sousChaine)
 
 
 // =====================================================
-// Méthode 2 : avec find()
-// Recherche d'une sous-chaîne CONSECUTIVE
+// Mï¿½thode 2 : avec find()
+// Recherche d'une sous-chaï¿½ne CONSECUTIVE
 // =====================================================
 
 bool contientAvecFind(string mot, string sousChaine)
@@ -186,7 +59,7 @@ bool contientAvecFind(string mot, string sousChaine)
 
 
 // =====================================================
-// Méthode 3 : remplacement SANS find()
+// Mï¿½thode 3 : remplacement SANS find()
 // =====================================================
 
 string remplacerSansFind(string mot, string ancienne, string nouvelle)
@@ -199,8 +72,8 @@ string remplacerSansFind(string mot, string ancienne, string nouvelle)
     {
         bool identique = true;
 
-        // Vérifier si l'ancienne sous-chaîne
-        // commence à la position i
+        // Vï¿½rifier si l'ancienne sous-chaï¿½ne
+        // commence ï¿½ la position i
         if (i + ancienne.length() <= mot.length())
         {
             for (int j = 0; j < ancienne.length(); j++)
@@ -217,18 +90,18 @@ string remplacerSansFind(string mot, string ancienne, string nouvelle)
             identique = false;
         }
 
-        // Si l'ancienne sous-chaîne est trouvée
+        // Si l'ancienne sous-chaï¿½ne est trouvï¿½e
         if (identique)
         {
-            // Ajouter la nouvelle sous-chaîne
+            // Ajouter la nouvelle sous-chaï¿½ne
             resultat += nouvelle;
 
-            // Sauter l'ancienne sous-chaîne
+            // Sauter l'ancienne sous-chaï¿½ne
             i += ancienne.length();
         }
         else
         {
-            // Copier le caractère actuel
+            // Copier le caractï¿½re actuel
             resultat += mot[i];
 
             i++;
@@ -278,7 +151,7 @@ int main()
 
 
     // =================================================
-    // Demander la sous-chaîne à rechercher
+    // Demander la sous-chaï¿½ne ï¿½ rechercher
     // =================================================
 
     cout << "Entrez la sous-chaine a rechercher : ";

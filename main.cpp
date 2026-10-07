@@ -9,13 +9,13 @@ using namespace chrono;
 
 
 // =====================================================
-// M�thode 1 : sans find()
-// Recherche d'une sous-cha�ne CONSECUTIVE
+// Méthode 1 : sans find()
+// Recherche d'une sous-chaîne CONSECUTIVE
 // =====================================================
 
 bool contientSansFind(string mot, string sousChaine)
 {
-    // Si la sous-cha�ne est plus longue que le mot
+    // Si la sous-chaîne est plus longue que le mot
     if (sousChaine.length() > mot.length())
     {
         return false;
@@ -26,7 +26,7 @@ bool contientSansFind(string mot, string sousChaine)
     {
         bool identique = true;
 
-        // Comparer les caract�res cons�cutifs
+        // Comparer les caractères consécutifs
         for (int j = 0; j < sousChaine.length(); j++)
         {
             if (mot[i + j] != sousChaine[j])
@@ -36,7 +36,7 @@ bool contientSansFind(string mot, string sousChaine)
             }
         }
 
-        // Toute la sous-cha�ne a �t� trouv�e
+        // Toute la sous-chaîne a été trouvée
         if (identique)
         {
             return true;
@@ -48,8 +48,8 @@ bool contientSansFind(string mot, string sousChaine)
 
 
 // =====================================================
-// M�thode 2 : avec find()
-// Recherche d'une sous-cha�ne CONSECUTIVE
+// Méthode 2 : avec find()
+// Recherche d'une sous-chaîne CONSECUTIVE
 // =====================================================
 
 bool contientAvecFind(string mot, string sousChaine)
@@ -59,7 +59,7 @@ bool contientAvecFind(string mot, string sousChaine)
 
 
 // =====================================================
-// M�thode 3 : remplacement SANS find()
+// Méthode 3 : remplacement SANS find()
 // =====================================================
 
 string remplacerSansFind(string mot, string ancienne, string nouvelle)
@@ -72,8 +72,8 @@ string remplacerSansFind(string mot, string ancienne, string nouvelle)
     {
         bool identique = true;
 
-        // V�rifier si l'ancienne sous-cha�ne
-        // commence � la position i
+        // Vérifier si l'ancienne sous-chaîne
+        // commence à la position i
         if (i + ancienne.length() <= mot.length())
         {
             for (int j = 0; j < ancienne.length(); j++)
@@ -90,18 +90,18 @@ string remplacerSansFind(string mot, string ancienne, string nouvelle)
             identique = false;
         }
 
-        // Si l'ancienne sous-cha�ne est trouv�e
+        // Si l'ancienne sous-chaîne est trouvée
         if (identique)
         {
-            // Ajouter la nouvelle sous-cha�ne
+            // Ajouter la nouvelle sous-chaîne
             resultat += nouvelle;
 
-            // Sauter l'ancienne sous-cha�ne
+            // Sauter l'ancienne sous-chaîne
             i += ancienne.length();
         }
         else
         {
-            // Copier le caract�re actuel
+            // Copier le caractère actuel
             resultat += mot[i];
 
             i++;
@@ -151,7 +151,7 @@ int main()
 
 
     // =================================================
-    // Demander la sous-cha�ne � rechercher
+    // Demander la sous-chaîne à rechercher
     // =================================================
 
     cout << "Entrez la sous-chaine a rechercher : ";
@@ -251,13 +251,36 @@ int main()
 
     auto debut3 = high_resolution_clock::now();
 
+    int nombreRemplacements = 0;
+
+    // Vector contenant seulement quelques exemples
+    vector<string> exemples;
+
     for (int i = 0; i < mots.size(); i++)
     {
+        // Garder l'ancien mot
+        string ancienMot = mots[i];
+
+        // Effectuer le remplacement
         mots[i] = remplacerSansFind(
             mots[i],
             sousChaine,
             nouvelleSousChaine
         );
+
+        // Vérifier si le mot a été modifié
+        if (ancienMot != mots[i])
+        {
+            nombreRemplacements++;
+
+            // Garder seulement les 10 premiers exemples
+            if (exemples.size() < 10)
+            {
+                exemples.push_back(
+                    ancienMot + " -> " + mots[i]
+                );
+            }
+        }
     }
 
     auto fin3 = high_resolution_clock::now();
@@ -267,7 +290,7 @@ int main()
 
 
     // =================================================
-    // AFFICHAGE DU TEMPS DE REMPLACEMENT
+    // AFFICHAGE DU REMPLACEMENT
     // =================================================
 
     cout << endl;
@@ -280,22 +303,23 @@ int main()
     cout << "Nouvelle sous-chaine : "
          << nouvelleSousChaine << endl;
 
-    cout << "Temps de remplacement : "
-         << temps3 << " ms" << endl;
-
-
-    // =================================================
-    // AFFICHER QUELQUES MOTS APRES REMPLACEMENT
-    // =================================================
+    cout << "Nombre total de mots modifies : "
+         << nombreRemplacements << endl;
 
     cout << endl;
-    cout << "========== MOTS APRES REMPLACEMENT =========="
+
+    cout << "Quelques exemples de remplacement :"
          << endl;
 
-    for (int i = 0; i < mots.size(); i++)
+    for (int i = 0; i < exemples.size(); i++)
     {
-        cout << mots[i] << endl;
+        cout << exemples[i] << endl;
     }
+
+    cout << endl;
+
+    cout << "Temps de remplacement : "
+         << temps3 << " ms" << endl;
 
 
     return 0;
